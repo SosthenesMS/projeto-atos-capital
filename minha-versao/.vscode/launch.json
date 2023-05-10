@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "DesafioDoLabirintoBk07",
+            "request": "launch",
+            "mainClass": "DesafioDoLabirintoBk07",
+            "projectName": "Labirinto"
+        },
+        {
+            "type": "java",
             "name": "DesafioDoLabirintoBk06",
             "request": "launch",
             "mainClass": "DesafioDoLabirintoBk06",

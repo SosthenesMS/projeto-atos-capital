@@ -108,6 +108,13 @@ public class DesafioDoLabirintoBk07 {
 
 		while (!achouSaida && iteracoes < maxIteracoes) {
 
+
+			/* 1 - Verificar antes de tudo se a posição atual possue mais de um caminho possível
+			 * 2 - Caso tenha mais de um caminho, salvar em uma Lista a possição e um boleano de mais de um caminho como true
+			 * 3 - Após esta verificação, seguir com loop normalmente, esta informação será usada apenas quando ficar sem saída
+			 * para poder retornar para a posição mais próxima que tenha mais de um caminho. Isso será no else, lá embaixo. 
+			 */
+
 			boolean proximaPosicaoVisitada = false;
 			boolean moverParaCima = lAtual > 0 && labirinto[lAtual - 1][cAtual].equals(CAMINHO) && up == false;
 			boolean moverParaEsquerda = cAtual > 0 && labirinto[lAtual][cAtual - 1].equals(CAMINHO) && left == false;
@@ -119,63 +126,20 @@ public class DesafioDoLabirintoBk07 {
 				lAtual += CIMA;
 				moveu = true;
 				down = true;
-				// up = false;
-				// left = false;
-				// right = false;
 
 				resultado.add("C [" + (lAtual + 1) + ", " + (cAtual + 1) + "]");
 				historicoDeMovimentos.add("C [" + (lAtual + 1) + ", " + (cAtual + 1) + "]");
 
-				// ultimaPosicao = resultado.size() - 1;
-				// for (String historico: historicoDeMovimentos) {
-				// if (ultimaPosicao == Integer.parseInt(historico)) {
-				// resultado.remove(ultimaPosicao);
-				// }
-				// }
-
-				// proximaPosicaoVisitada = visitados[lAtual][cAtual];
-				// moveu = true;
-
-				// if (proximaPosicaoVisitada) {
-
-				// resultado.remove(resultado.size() - 1); // Tem que voltar para a posição
-				// anterior
-
-				// if (resultado.isEmpty()) {
-
-				// System.out.println("Não foi possível encontrar a saída do labirinto"); // Não
-				// há mais movimentos possíveis e não encontrou a saída
-				// return;
-				// }
-
-				// } else visitados[lAtual][cAtual] = true; // Marcar a posição como visitada
 
 			} else if (moverParaEsquerda) {
 
 				cAtual += ESQUERDA;
 				moveu = true;
 				right = true;
-				// down = false;
-				// up = false;
-				// left = false;
 
 				resultado.add("E [" + (lAtual + 1) + ", " + (cAtual + 1) + "]");
 				historicoDeMovimentos.add("E [" + (lAtual + 1) + ", " + (cAtual + 1) + "]");
 
-				// proximaPosicaoVisitada = visitados[lAtual][cAtual];
-				// moveu = true;
-
-				// if (proximaPosicaoVisitada) {
-				// // Tem que voltar para a posição anterior
-				// resultado.remove(resultado.size() - 1);
-				// if (resultado.isEmpty()) {
-				// // Não há mais movimentos possíveis e não encontrou a saída
-				// System.out.println("Não foi possível encontrar a saída do labirinto");
-				// return;
-				// }
-				// } else {
-				// visitados[lAtual][cAtual] = true; // Marcar a posição como visitada
-				// }
 
 			} else if (moverParaDireita) {
 
@@ -189,20 +153,6 @@ public class DesafioDoLabirintoBk07 {
 				resultado.add("D [" + (lAtual + 1) + ", " + (cAtual + 1) + "]");
 				historicoDeMovimentos.add("D [" + (lAtual + 1) + ", " + (cAtual + 1) + "]");
 
-				// proximaPosicaoVisitada = visitados[lAtual][cAtual];
-				// moveu = true;
-
-				// if (proximaPosicaoVisitada) {
-				// // Tem que voltar para a posição anterior
-				// resultado.remove(resultado.size() - 1);
-				// if (resultado.isEmpty()) {
-				// // Não há mais movimentos possíveis e não encontrou a saída
-				// System.out.println("Não foi possível encontrar a saída do labirinto");
-				// return;
-				// }
-				// } else {
-				// visitados[lAtual][cAtual] = true; // Marcar a posição como visitada
-				// }
 
 			} else if (moverParaBaixo) {
 
@@ -210,45 +160,27 @@ public class DesafioDoLabirintoBk07 {
 				lAtual += BAIXO;
 				moveu = true;
 				up = true;
-				// down = false;
-				// left = false;
-				// right = false;
 
 				resultado.add("B [" + (lAtual + 1) + ", " + (cAtual + 1) + "]");
 				historicoDeMovimentos.add("B [" + (lAtual + 1) + ", " + (cAtual + 1) + "]");
 
-				// proximaPosicaoVisitada = visitados[lAtual][cAtual];
-				// moveu = true;
-
-				// if (proximaPosicaoVisitada) {
-				// // Tem que voltar para a posição anterior
-				// resultado.remove(resultado.size() - 1);
-				// if (resultado.isEmpty()) {
-				// // Não há mais movimentos possíveis e não encontrou a saída
-				// System.out.println("Não foi possível encontrar a saída do labirinto");
-				// return;
-				// }
-				// } else {
-				// visitados[lAtual][cAtual] = true; // Marcar a posição como visitada
-				// }
+				
 
 			} else {
+
+
+
+
+				/* 1 - Verificar a posição mais próxima que tenha mais de uma possibilidade de caminho
+				 * 2 - Travar o caminho de onde eu vim, pois estava sem saída e tbm travar o caminho já visitado (confrontar com o histórico)
+				 * 3 - Forçar a procura do caminho novo
+				 */
 
 				// Verifica qual foi a última posição e o seu movimento
 
 				ultimaPosicao = resultado.get(resultado.size() - 1);
 				var ultimoMovimento = ultimaPosicao.substring(0, 1);
-				// historicoDeMovimentos.add(ultimoMovimento +" [" + (lAtual + 1) + ", " +
-				// (cAtual + 1) + "]");
-
-				// Remoção do último movinento e voltando uma posição.
-				//resultado.remove(resultado.size() - 1);
-				// var novaPosicao = resultado.get(resultado.size() - 1);
-				// var novoMovimento = novaPosicao.substring(0, 1);
-				// var novaPosicaoRagex = Integer.parseInt(resultado.get(resultado.size() - 1).replaceAll("[^0-9]", ""));
-				// String novaPosicaoTexto = Integer.toString(novaPosicaoRagex);
-				// int novaLinha = Character.getNumericValue(novaPosicaoTexto.charAt(0));
-				// int novaColuna = Character.getNumericValue(novaPosicaoTexto.charAt(1));
+				
 
 				// Condicional da última posição
 				switch (ultimoMovimento) {
@@ -303,63 +235,12 @@ public class DesafioDoLabirintoBk07 {
 
 				}
 
-				// // Atribuição das novas coordenadas
-
-				// lAtual = novaLinha;
-				// cAtual = novaColuna;
-
-				// System.out.println("ultimo index = " + resultado.get(resultado.size()-4));
-				// System.out.println("ultimo index = " + resultado.get(3));
-				// resultado.remove(resultado.size()-2);
-				//
-
-				// System.out.println(right);
-				// System.out.println(("t [" + (lAtual + 1) + ", " + (cAtual + 1) + "]"));
 				System.out.println("ultimaPosicao = " + ultimaPosicao);
 				System.out.println("ultimoMovimento = " + ultimoMovimento);
 				//System.out.println("novaPosicao = " + novaPosicao);
 				System.out.println("tamanho =" + resultado.size());
 				System.out.println("Linha final " + lAtual);
 				System.out.println("Coluna final " + cAtual);
-				// System.out.println("novo movimento = " + novoMovimento);
-				// System.out.println("novaPosicaoRagex = " + novaPosicaoRagex);
-				// System.out.println("novaPosicaoTexto = " + novaPosicaoTexto);
-				// System.out.println("novaLinha = " + novaLinha);
-				// System.out.println("novaColuna = " + novaColuna);
-
-				 //iteracoes = maxIteracoes;
-
-				// List<String> ultimaPosicaoVet = List.of(ultimaPosicao.split(" "));
-				// int indicesEmNumeros = Integer.parseInt(ultimaPosicaoVet.get(0));
-				// String indicesEmTexto = Integer.toString(indicesEmNumeros);
-
-				// ultimaPosicao = resultado.size() - 1;
-
-				// ultimaPosicao = ;
-
-				// var teste =
-				// System.out.println(teste);
-				// System.out.println(ultimaPosicao);
-
-				// System.out.println("ultima posicao nova " + ultimaPosicao);
-				// verificadorDePossibilidades(ultimaPosicao);
-
-				// resultado.remove(resultado.size() - 1);
-
-				// System.out.println("nova linha = " + novaLinha + " nova coluna = " +
-				// novaColuna);
-				// System.out.println(ultimaPosicaoVet);
-				// System.out.println(ultimaPosicaoVet.size());
-
-				// int linhaNova = ;
-				// int colunaNova = Integer.parseInt(ultimaPosicaoVet[1]);
-				// System.out.println("linha nova " + linhaNova);
-				// System.out.println("Coluna nova " + colunaNova);
-
-				// System.out.println(ultimaPosicaoVet.toString());
-				// lAtual = Integer.parseInt(ultimaPosicao[1]);
-				// cAtual = Integer.parseInt(ultimaPosicao[2].substring(0,
-				// ultimaPosicao[2].length() - 1));
 
 			}
 
@@ -367,19 +248,11 @@ public class DesafioDoLabirintoBk07 {
 			achouSaida = lAtual == lSaida && cAtual == cSaida;
 		}
 
-		// System.out.println("analise = " + moverParaCima);
 		// Gerar o arquivo de saída
+
 		 resultado.forEach(n -> System.out.println(n + "\n"));
 		 historicoDeMovimentos.forEach(n -> System.out.println("Hitórico completo: " + n + "\n"));
-		// System.out.println(historicoDeMovimentos.size());
-		// System.out.println(resultado.size());
-
-		// resultado.remove(ultimaPosicao);
-		// ultimaPosicao = resultado.size() - 1;
-		// System.out.println("Resultado da ultima posição" +
-		// resultado.get(ultimaPosicao));
-		// utilizar essa variavel ultimaPosicao para criar um novo array com o indice e
-		// tals
+		
 	}
 
 	public static void verificadorDePossibilidades(String ultimaPosicao) {
