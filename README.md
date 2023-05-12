@@ -14,7 +14,7 @@
 4. A partir do ponto de origem se deslocar (seguindo a ordem de prioridade de deslocamento) e encontrar a única saída (que se encontra no ponto 0 localizado em uma extremidade da matriz).
 5. ao encontrar a saída gerar um arquivo texto de saída (na mesma pasta onde está o arquivo de entrada, só que com outro nome de arquivo. ex: entrada.txt é arquivo de entrada então o arquivo de saída pode ser saída-entrada.txt) contendo cada passo do trajeto, onde cada linha indica a direção e posição destinada. A primeira linha do arquivo de saída deve estar com O (origem) seguido da posição inicial.
 
-## Regras do projeto
+## :memo: Regras do projeto
   Será dada uma entrada em arquivo texto, onde na primeira linha contém as dimensões do labirinto (Linhas Colunas) e nas demais linhas o labirinto em si, em que:
 
 * 1 indica uma parede (isto é, não pode seguir neste ponto da matriz);
@@ -30,10 +30,10 @@ O objetivo é encontrar a única saída, sem "andar pelas paredes" e seguindo a 
 3. Ir para a direita (D);
 4. Ir para baixo (B);
 
-### Observação importante:
+### :warning: Observação importante:
 Caso se alcance um ponto em que não é possível se movimentar e/ou não tenham mais posições que ainda não foram visitadas, deve-se retornar usando o mesmo caminho utilizado até este ponto “sem-saída” até o último ponto onde teve mais de uma posição possível de movimento. A ordem de movimento só é utilizada quando há mais de uma posição possível de movimento para posições ainda não visitadas.
 
-## Exemplo de entrada:
+## :bulb: Exemplo de entrada:
 
 ```
 5 8
