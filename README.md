@@ -1,6 +1,6 @@
 </br>
 <div align="center">
-  <img src="projeto-atos-capital/assets/logo-atos-capital.svg" width="60%" />
+  <img src="assets/logo-atos-capital.svg" width="60%" />
 </div>
 </br>
 
